@@ -7,5 +7,6 @@
                  [ring/ring-json "0.5.1"]
                  [ring/ring-jetty-adapter "1.9.5"]
                  [compojure "1.6.2"]
-                 [cheshire "5.10.1"]]
+                 [cheshire "5.10.1"]
+                 [ring/ring-mock "0.4.0"]]
   :repl-options {:init-ns record-parser.core})
