@@ -13,7 +13,8 @@
   (-> date-str
       str/trim
       (str/replace #"-" "/")
-      (LocalDate/parse date-formatter)))
+      (LocalDate/parse date-formatter)
+      (.format output-date-formatter)))
 
 (defn parse-record 
   [line delimiter]
@@ -55,7 +56,7 @@
 
 (def sort-by-gender (sort-by sb-gender all-records))
 (def sort-by-birth-date (sort-by sb-birth-date all-records))
-(def sort-by-last-name-desc (sort-by sb-last-name-desc all-records))
+(def sort-by-last-name-desc (sort-by sb-last-name-desc desc-compare all-records))
 
 (defn cmd-line-display
   []
