@@ -1,0 +1,3 @@
+Smith | Steve | Male | Red | 3/3/1985
+Bond | James | Male | Black | 11/11/1953
+Ames | Anna | Female | Green | 5/15/1992
