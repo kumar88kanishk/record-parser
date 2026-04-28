@@ -30,15 +30,47 @@
     (doall (map #(parse-record % delimiter)
                 (remove str/blank? (line-seq rdr))))))
 
-(defn -main 
+(def sb-gender
+  (juxt (comp #{"Female" "Male"} :gender) :last-name))
+
+(def sb-birth-date
+  :dob)
+
+(def sb-last-name-desc
+  :last-name)
+
+(def desc-compare
+  (fn [a b]
+    (compare b a)))
+
+(defn display-view
+  [msg records]
+  (println (str "\n ---" msg "----"))
+  (println records))
+
+(def comma-records (load-records "input/comma.txt" #","))
+(def pipe-records (load-records "input/pipe.txt" #"\|"))
+(def space-records (load-records "input/space.txt" #"\s+"))
+(def all-records (concat comma-records pipe-records space-records))
+
+(def sort-by-gender (sort-by sb-gender all-records))
+(def sort-by-birth-date (sort-by sb-birth-date all-records))
+(def sort-by-last-name-desc (sort-by sb-last-name-desc all-records))
+
+(defn cmd-line-display
   []
-  (let [comma-records (load-records "input/comma.txt" #",")
-        pipe-records (load-records "input/pipe.txt" #"\|")
-        space-records (load-records "input/space.txt" #"\s+")
-        all-records (concat comma-records pipe-records space-records)]
-    all-records))
+  (display-view "Output 1: By Gender (F first), then Last Name"
+                sort-by-gender)
+  (display-view "Output 2: By Birth Date (Ascending)"
+                sort-by-birth-date)
+  (display-view "Output 3: By Last Name (Descending)"
+                sort-by-last-name-desc))
 
 (comment
-  (-main)
+  (cmd-line-display)
   )
+
+
+
+
 
